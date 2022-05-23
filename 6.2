@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class expression
+{
+public:
+    double  a=0;
+    double b=0;
+    char operation='+';
+};
+expression convert(string s)
+{
+    expression y;
+    int j=0;
+    int error=0;
+    const int siz=s.size();
+    int r=siz-1;
+    char S[r];    // дополнительный массив для вычислений
+    for (int i = 0; i < siz; i++) {
+           if (s[i] == ':' or s[i] == '+' or s[i] == '-' or s[i] == '*') // с 20 по 32 строчку мы заполняем массив
+           {
+                   y.operation = s[i];
+                   S[j] = ' ';
+                   j++;
+                   continue;
+           };
+           if (isdigit(s[i]) or s[i]==' ')
+           {
+               S[j] = s[i];
+               j++;
+               continue;
+           }
+           cout << "ERROR: you entered the wrong character!" << endl;
+           error++;
+           break;
+    }
+    if (error==0) // выполняем только если нет ошибки
+    {
+
+        char *ptr;
+        char *p;
+        y.a = strtod(S, &ptr);
+        p = ptr;
+        y.b = strtod(p, &ptr);
+    }
+    return y;
+}
